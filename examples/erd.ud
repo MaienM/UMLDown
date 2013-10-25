@@ -1,0 +1,12 @@
+# Comment.
+entity Account:
+	int id
+	string username
+	string password
+	string salt
+	string email
+
+entity Server:
+	int id
+
+relation Account Server 1 *
