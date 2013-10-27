@@ -7,9 +7,6 @@ class BaseElement(object):
 	The base for all drawable elements.
 	"""
 
-	def __init__(self):
-		pass
-
 	def __str__(self):
 		return '<{}: {}>'.format(self.__class__.__name__, self.getname())
 
@@ -37,7 +34,6 @@ class Entity(BaseElement):
 	"""
 
 	def __init__(self, name):
-		super().__init__()
 		self.name = name
 		self.attributes = []
 
@@ -48,9 +44,9 @@ class Entity(BaseElement):
 		self.attributes.append(line)
 
 	def tographviz(self):
-		return '\t"{name}" [\n\t\tlabel = "{lines}"\n\t\tshape = "record"\n\t]'.format(
+		return '\t"{name}" [\n\t\tlabel = "{{{name}|{lines}}}"\n\t\tshape = "record"\n\t]'.format(
 			name = self.getname(),
-			lines = '|'.join(self.attributes)
+			lines = '\\n'.join(self.attributes)
 		)
 
 class Relationship(BaseElement):
@@ -59,7 +55,6 @@ class Relationship(BaseElement):
 	"""
 
 	def __init__(self, ent1, mul1, mul2, ent2):
-		super().__init__()
 		self.ent1 = ent1
 		self.ent2 = ent2
 		self.mul1 = mul1
@@ -69,7 +64,7 @@ class Relationship(BaseElement):
 		return '-'.join((self.ent1, self.mul1, self.mul2, self.ent2))
 
 	def tographviz(self):
-		return '\t"{first}" -> "{second}"'.format(
+		return '\t"{first}" -- "{second}"'.format(
 			first = self.ent1,
 			second = self.ent2
 		)

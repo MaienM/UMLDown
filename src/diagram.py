@@ -1,4 +1,5 @@
 import shlex
+import pydot
 from elements import ELEMENTMAP
 
 class Diagram(object):
@@ -41,11 +42,13 @@ class Diagram(object):
 		Convert to graphviz format.
 		"""
 		graphelements = [ent.tographviz() for ent in self.elements.values()]
-		return 'digraph G {{\n{elements}\n}}'.format(elements = '\n\n'.join(graphelements))
+		return 'graph G {{\n{elements}\n}}'.format(elements = '\n\n'.join(graphelements))
 
-	def render(self):
+	def render(self, fn):
 		"""
 		Render the diagram.
 		"""
+		dot = pydot.graph_from_dot_data(self.tographviz())
+		dot.write(fn, format='png')
 
 #vim:net:ts=4:sts=4
