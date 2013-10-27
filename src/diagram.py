@@ -36,6 +36,17 @@ class Diagram(object):
 						raise Exception('Duplicate entity: ' + name)
 					self.entities[name] = obj
 
+	def tographviz(self):
+		"""
+		Convert to graphviz format.
+		"""
+		graphentities = [ent.tographviz() for ent in self.entities]
+		return """
+			digraph G {
+				{elements}
+			}
+		""".format(elements = '\n\n'.join(graphentities))
+
 	def render(self):
 		"""
 		Render the diagram.

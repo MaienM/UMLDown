@@ -1,6 +1,6 @@
-from .base import BaseEntity
+from .base import BaseElement
 
-class Entity(BaseEntity):
+class Entity(BaseElement):
 	"""
 	An entity.
 	"""

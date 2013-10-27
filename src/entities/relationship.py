@@ -1,6 +1,6 @@
-from .base import BaseEntity
+from .base import BaseElement
 
-class Relationship(BaseEntity):
+class Relationship(BaseElement):
 	"""
 	A relationship between two entities.
 	"""
