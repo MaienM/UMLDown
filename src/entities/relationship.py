@@ -14,3 +14,9 @@ class Relationship(BaseElement):
 
 	def getname(self):
 		return '-'.join((self.ent1, self.mul1, self.mul2, self.ent2))
+
+	def tographviz(self):
+		return '\t"{first}" -> "{second}"'.format(
+			first = self.ent1,
+			second = self.ent2
+		)

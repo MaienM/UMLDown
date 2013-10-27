@@ -40,12 +40,8 @@ class Diagram(object):
 		"""
 		Convert to graphviz format.
 		"""
-		graphentities = [ent.tographviz() for ent in self.entities]
-		return """
-			digraph G {
-				{elements}
-			}
-		""".format(elements = '\n\n'.join(graphentities))
+		graphentities = [ent.tographviz() for ent in self.entities.values()]
+		return 'digraph G {{\n{elements}\n}}'.format(elements = '\n\n'.join(graphentities))
 
 	def render(self):
 		"""

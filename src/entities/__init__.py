@@ -19,7 +19,7 @@ def buildentitymap():
 	Build a mapping of all valid entities.
 	"""
 	entitymap = {}
-	for cls in inheritors(getattr(sys.modules['%s.%s' % (__name__, 'base')], 'BaseEntity')):
+	for cls in inheritors(getattr(sys.modules['%s.%s' % (__name__, 'base')], 'BaseElement')):
 		if not cls.__name__.startswith('Base'):
 			entitymap[cls.__name__.lower()] = cls
 	return entitymap
