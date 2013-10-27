@@ -1,5 +1,5 @@
 import shlex
-from entities import ENTITYMAP
+from elements import ELEMENTMAP
 
 class Diagram(object):
 	"""
@@ -7,7 +7,7 @@ class Diagram(object):
 	"""
 
 	def __init__(self):
-		self.entities = {}
+		self.elements = {}
 
 	def parse(self, fn):
 		"""
@@ -28,20 +28,20 @@ class Diagram(object):
 				# Else, create new object.
 				else:
 					entname, rest = line.split(None, 1)
-					if entname not in ENTITYMAP:
+					if entname not in ELEMENTMAP:
 						raise Exception('Invalid entity: ' + entname)
-					obj = ENTITYMAP[entname](*shlex.split(rest.strip().strip(':')))
+					obj = ELEMENTMAP[entname](*shlex.split(rest.strip().strip(':')))
 					name = obj.getname()
-					if name in self.entities:
+					if name in self.elements:
 						raise Exception('Duplicate entity: ' + name)
-					self.entities[name] = obj
+					self.elements[name] = obj
 
 	def tographviz(self):
 		"""
 		Convert to graphviz format.
 		"""
-		graphentities = [ent.tographviz() for ent in self.entities.values()]
-		return 'digraph G {{\n{elements}\n}}'.format(elements = '\n\n'.join(graphentities))
+		graphelements = [ent.tographviz() for ent in self.elements.values()]
+		return 'digraph G {{\n{elements}\n}}'.format(elements = '\n\n'.join(graphelements))
 
 	def render(self):
 		"""
