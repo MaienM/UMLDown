@@ -8,5 +8,21 @@ entity Account:
 
 entity Server:
 	int id
+	int gid
+	int aid
+	string hostname
+	int port
 
-relation Account Server 1 *
+entity Game:
+	int id
+	string name
+
+entity Property:
+	int id
+	int sid
+	string key
+	string value
+
+relationship Account 1 * Server
+relationship Account 1 * Game
+relationship Property 1 * Server
