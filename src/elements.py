@@ -64,9 +64,11 @@ class Relationship(BaseElement):
 		return '-'.join((self.ent1, self.mul1, self.mul2, self.ent2))
 
 	def tographviz(self):
-		return '\t"{first}" -- "{second}"'.format(
+		return '\t"{first}" -- "{second}" [\n\t\theadlabel="{firstmul}"\n\t\ttaillabel="{secondmul}"\n\t]'.format(
 			first = self.ent1,
-			second = self.ent2
+			firstmul = self.mul2,
+			second = self.ent2,
+			secondmul = self.mul1
 		)
 
 def inheritors(cls):
